@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class BooksControllerTest < ActionDispatch::IntegrationTest
+ add_review_book
   setup do
     @book = books(:one)
   end
@@ -45,4 +46,11 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to books_url
   end
+=======
+  test "should get books" do
+    get books_books_url
+    assert_response :success
+  end
+
+ main
 end

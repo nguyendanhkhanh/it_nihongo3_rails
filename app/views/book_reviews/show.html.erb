@@ -13,7 +13,6 @@
 <p>
   <strong>Review:</strong>
   <%= @book_review.review %>
-  (<i><%= book_review.user.name if book_review.user%></i>)</li>
 </p>
 
 <%= link_to 'Edit', edit_book_review_path(@book_review) %> |

@@ -1,92 +1,76 @@
-class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+class BookReviewsController < ApplicationController
+  before_action :set_book_review, only: [:show, :edit, :update, :destroy]
 
- add_review_book
-  # GET /books
-  # GET /books.json
+  # GET /book_reviews
+  # GET /book_reviews.json
   def index
-=======
-
-  # GET /books	  # GET /books
-  # GET /books.json	  # GET /books.json
-    def index
- main
-    @books = Book.all
+    @book_reviews = BookReview.all
   end
 
-  # GET /books/1
-  # GET /books/1.json
+  # GET /book_reviews/1
+  # GET /book_reviews/1.json
   def show
-add_review_book
-        @book_review = BookReview.new
-=======
- main
   end
 
-  # GET /books/new
+  # GET /book_reviews/new
   def new
-    @book = Book.new
+    @book_review = BookReview.new
   end
 
-  # GET /books/1/edit
+  # GET /book_reviews/1/edit
   def edit
   end
 
-  # POST /books
-  # POST /books.json
+  # POST /book_reviews
+  # POST /book_reviews.json
   def create
-    @book = Book.new(book_params)
+    @book_review = BookReview.new(book_review_params)
+    @book_review.user_id = current_user.id
 
     respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render :show, status: :created, location: @book }
+      if @book_review.save
+        url = "/books/" + @book_review.book_id.to_s
+        format.html { redirect_to url, notice: 'Book review was successfully created.' }
+        format.json { render :show, status: :created, location: @book_review }
       else
         format.html { render :new }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.json { render json: @book_review.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /books/1
-  # PATCH/PUT /books/1.json
+  # PATCH/PUT /book_reviews/1
+  # PATCH/PUT /book_reviews/1.json
   def update
     respond_to do |format|
-      if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book }
+      if @book_review.update(book_review_params)
+        format.html { redirect_to @book_review, notice: 'Book review was successfully updated.' }
+        format.json { render :show, status: :ok, location: @book_review }
       else
         format.html { render :edit }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.json { render json: @book_review.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /books/1
-  # DELETE /books/1.json
+  # DELETE /book_reviews/1
+  # DELETE /book_reviews/1.json
   def destroy
-    @book.destroy
+    @book_review.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to book_reviews_url, notice: 'Book review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
+    def set_book_review
+      @book_review = BookReview.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def book_params
-add_review_book
-    params.require(:book).permit(:title, :number_of_pages, :image, :detail)
+    def book_review_params
+      params.require(:book_review).permit(:user_id, :book_id, :review)
     end
 end
-=======
-      params.require(:book).permit(:title, :number_of_pages)
-    end
-end
-main

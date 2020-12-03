@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
- add_review_book
-ActiveRecord::Schema.define(version: 2020_11_14_015218) do
+ActiveRecord::Schema.define(version: 2020_11_08_090214) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,15 +32,21 @@ ActiveRecord::Schema.define(version: 2020_11_14_015218) do
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
-=======
-ActiveRecord::Schema.define(version: 2020_12_03_032252) do
-main
+
+  create_table "book_reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "book_id"
+    t.string "review"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.integer "number_of_pages"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "detail"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,7 +57,6 @@ main
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-add_review_book
     t.string "name"
     t.integer "age"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -61,9 +65,4 @@ add_review_book
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
- main
 end

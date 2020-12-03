@@ -13,7 +13,13 @@
   <strong>Detail:</strong>
   <%= @book.detail %>
 </p>
-
+<h2>Review List</h2>
+<ul>
+  <% @book.book_review.each do |book_review|%>
+   <li><%= book_review.review %>
+     (<i><%= book_review.user_id %></i>)</li>
+<% end %>
+</ul>
 
 <p>
    <% if @book.image.attached? %>
@@ -23,13 +29,7 @@
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
 
-<h2>Review List</h2>
-<ul>
-  <% @book.book_review.each do |book_review|%>
-   <li><%= book_review.review %>
-     (<i><%= book_review.user_id %></i>)</li>
-<% end %>
-</ul>
+
 <p>
     
 </p>
